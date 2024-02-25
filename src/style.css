@@ -3,3 +3,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+main {
+  display: flex;
+}
+
+nav {
+  width: 250px;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.lineContainer {
+  display: flex;
+}

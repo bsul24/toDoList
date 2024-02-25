@@ -1,15 +1,10 @@
 export default class ToDo {
-  constructor(title, desc) {
-    this.title = title;
+  constructor(desc) {
     this.desc = desc;
   }
 
   setDueDate(dueDate) {
     this.dueDate = dueDate;
-  }
-
-  setTitle(title) {
-    this.title = title;
   }
 
   setDesc(desc) {
