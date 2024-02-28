@@ -1,8 +1,12 @@
 import { getInbox } from ".";
 import addInboxItem from "./handleInboxItems";
 import { removeInboxItem } from "./handleInboxItems";
+import renderNav from "./renderNav";
+import renderTodos from "./renderTodos";
+import renderInput from "./renderInput";
 
 export default function renderInbox() {
+  renderNav();
   const content = document.querySelector("#content");
   content.innerHTML = "";
   const inbox = getInbox();
@@ -13,23 +17,7 @@ export default function renderInbox() {
   content.appendChild(header);
 
   // Render inbox items
-  inbox.forEach((item) => {
-    const lineContainer = document.createElement("div");
-    lineContainer.classList.add("lineContainer");
-    const line = document.createElement("p");
-    line.textContent = item.desc;
-    line.classList.add("toDoItem");
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = "X";
-    lineContainer.appendChild(line);
-    lineContainer.appendChild(completeBtn);
-
-    content.appendChild(lineContainer);
-    completeBtn.addEventListener("click", function (e) {
-      lineContainer.remove();
-      removeInboxItem(item);
-    });
-  });
+  renderTodos(inbox);
 
   // Render add item button
   const newItemBtn = document.createElement("button");
@@ -37,35 +25,40 @@ export default function renderInbox() {
   newItemBtn.classList.add("newItemBtn");
   content.appendChild(newItemBtn);
 
-  newItemBtn.addEventListener("click", renderInput);
+  newItemBtn.addEventListener("click", showInput);
 }
 
-function renderInput() {
-  const content = document.querySelector("#content");
-
-  // Hide new item button
-  const newItemBtn = document.querySelector(".newItemBtn");
-  newItemBtn.style.display = "none";
-
-  // Create input
-  const input = document.createElement("input");
-  input.classList.add("addInput");
-  content.appendChild(input);
-
-  // Create input buttons
-  const addBtn = document.createElement("button");
-  addBtn.textContent = "Add";
-  addBtn.classList.add(".addBtn");
-  const cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "Cancel";
-  cancelBtn.classList.add("Cancel");
-  content.appendChild(addBtn);
-  content.appendChild(cancelBtn);
-
-  addBtn.addEventListener("click", function (e) {
-    const input = document.querySelector(".addInput");
-    addInboxItem(input.value);
-    renderInbox();
-  });
-  cancelBtn.addEventListener("click", renderInbox);
+function showInput() {
+  renderInput(addInboxItem, renderInbox, false);
 }
+
+// function renderInput() {
+//   console.log("fart");
+//   const content = document.querySelector("#content");
+
+//   // Hide new item button
+//   const newItemBtn = document.querySelector(".newItemBtn");
+//   newItemBtn.style.display = "none";
+
+//   // Create input
+//   const input = document.createElement("input");
+//   input.classList.add("addInput");
+//   content.appendChild(input);
+
+//   // Create input buttons
+//   const addBtn = document.createElement("button");
+//   addBtn.textContent = "Add";
+//   addBtn.classList.add(".addBtn");
+//   const cancelBtn = document.createElement("button");
+//   cancelBtn.textContent = "Cancel";
+//   cancelBtn.classList.add("cancel");
+//   content.appendChild(addBtn);
+//   content.appendChild(cancelBtn);
+
+//   addBtn.addEventListener("click", function (e) {
+//     const input = document.querySelector(".addInput");
+//     addInboxItem(input.value);
+//     renderInbox();
+//   });
+//   cancelBtn.addEventListener("click", renderInbox);
+// }

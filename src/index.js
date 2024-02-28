@@ -28,13 +28,3 @@ export function getUpcoming() {
 
 renderNav();
 renderInbox();
-
-// DOM elements
-const inboxBtn = document.querySelector(".inboxBtn");
-const todayBtn = document.querySelector(".todayBtn");
-const upcomingBtn = document.querySelector(".upcomingBtn");
-
-// Event Listeners
-inboxBtn.addEventListener("click", renderInbox);
-todayBtn.addEventListener("click", renderToday);
-upcomingBtn.addEventListener("click", renderUpcoming);
